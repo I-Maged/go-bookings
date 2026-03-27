@@ -39,3 +39,13 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 
 	render.RenderTemplate(w, "about.page.html", &models.TemplateDate{StringMap: stringMap})
 }
+
+func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "generals.page.html", &models.TemplateDate{})
+}
+func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "majors.page.html", &models.TemplateDate{})
+}
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "contact.page.html", &models.TemplateDate{})
+}
