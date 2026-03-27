@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/I-Maged/00-golang-first-server/pkg/config"
-	"github.com/I-Maged/00-golang-first-server/pkg/handlers"
-	"github.com/I-Maged/00-golang-first-server/pkg/render"
+	"github.com/I-Maged/go-bookings/pkg/config"
+	"github.com/I-Maged/go-bookings/pkg/handlers"
+	"github.com/I-Maged/go-bookings/pkg/render"
 	"github.com/alexedwards/scs/v2"
 )
 
@@ -18,7 +18,6 @@ var app config.AppConfig
 var session *scs.SessionManager
 
 func main() {
-
 	// should be true in production
 	app.InProduction = false
 

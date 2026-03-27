@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/I-Maged/00-golang-first-server/pkg/config"
-	"github.com/I-Maged/00-golang-first-server/pkg/handlers"
+	"github.com/I-Maged/go-bookings/pkg/config"
+	"github.com/I-Maged/go-bookings/pkg/handlers"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )
@@ -18,6 +18,9 @@ func routes(a *config.AppConfig) http.Handler {
 
 	mux.Get("/", handlers.Repo.Home)
 	mux.Get("/about", handlers.Repo.About)
+
+	fileServer := http.FileServer(http.Dir("./static/"))
+	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
 
 	return mux
 }
