@@ -1,7 +1,9 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/I-Maged/go-bookings/pkg/config"
@@ -57,7 +59,32 @@ func (m *Repository) SearchAvailability(w http.ResponseWriter, r *http.Request) 
 func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 	start := r.Form.Get("start")
 	end := r.Form.Get("end")
-	w.Write([]byte(fmt.Sprintf("start date is %s, end date is %s", start, end)))
+	// w.Write([]byte(fmt.Sprintf("start date is %s, end date is %s", start, end)))
+	fmt.Fprintf(w, "start date is %s, end date is %s", start, end)
+}
+
+type jsonResponse struct {
+	OK      bool   `json:"ok"`
+	Message string `json:"message"`
+}
+
+func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
+	// start := r.Form.Get("start")
+	// end := r.Form.Get("end")
+	resp := jsonResponse{
+		OK:      true,
+		Message: "Available!!!",
+	}
+
+	out, err := json.MarshalIndent(resp, "", "     ")
+	if err != nil {
+		log.Println(err)
+	}
+
+	log.Println(string(out))
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(out)
 }
 
 func (m *Repository) MakeReservation(w http.ResponseWriter, r *http.Request) {
