@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/I-Maged/go-bookings/pkg/config"
-	"github.com/I-Maged/go-bookings/pkg/handlers"
+	"github.com/I-Maged/go-bookings/internal/config"
+	"github.com/I-Maged/go-bookings/internal/handlers"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )

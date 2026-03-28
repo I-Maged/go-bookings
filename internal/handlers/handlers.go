@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/I-Maged/go-bookings/pkg/config"
-	"github.com/I-Maged/go-bookings/pkg/models"
-	"github.com/I-Maged/go-bookings/pkg/render"
+	"github.com/I-Maged/go-bookings/internal/config"
+	"github.com/I-Maged/go-bookings/internal/models"
+	"github.com/I-Maged/go-bookings/internal/render"
 )
 
 var Repo *Repository
