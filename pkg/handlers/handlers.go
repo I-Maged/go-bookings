@@ -27,7 +27,7 @@ func NewHnadlers(r *Repository) {
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	remoteIp := r.RemoteAddr
 	m.App.Session.Put(r.Context(), "remote_ip", remoteIp)
-	render.RenderTemplate(w, "home.page.html", &models.TemplateDate{})
+	render.RenderTemplate(w, "home.page.tmpl", &models.TemplateDate{})
 }
 
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
@@ -37,24 +37,24 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	remoteIp := m.App.Session.GetString(r.Context(), "remote_ip")
 	stringMap["remote_ip"] = remoteIp
 
-	render.RenderTemplate(w, "about.page.html", &models.TemplateDate{StringMap: stringMap})
+	render.RenderTemplate(w, "about.page.tmpl", &models.TemplateDate{StringMap: stringMap})
 }
 
 func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "generals.page.html", &models.TemplateDate{})
+	render.RenderTemplate(w, "generals.page.tmpl", &models.TemplateDate{})
 }
 func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "majors.page.html", &models.TemplateDate{})
+	render.RenderTemplate(w, "majors.page.tmpl", &models.TemplateDate{})
 }
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "contact.page.html", &models.TemplateDate{})
+	render.RenderTemplate(w, "contact.page.tmpl", &models.TemplateDate{})
 }
 func (m *Repository) SearchAvailability(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "search-availability.page.html", &models.TemplateDate{})
+	render.RenderTemplate(w, "search-availability.page.tmpl", &models.TemplateDate{})
 }
 func (m *Repository) MakeReservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "make-reservation.page.html", &models.TemplateDate{})
+	render.RenderTemplate(w, "make-reservation.page.tmpl", &models.TemplateDate{})
 }
 func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "reservation-summary.page.html", &models.TemplateDate{})
+	render.RenderTemplate(w, "reservation-summary.page.tmpl", &models.TemplateDate{})
 }
