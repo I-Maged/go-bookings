@@ -10,6 +10,7 @@ import (
 
 	"github.com/I-Maged/go-bookings/pkg/config"
 	"github.com/I-Maged/go-bookings/pkg/models"
+	"github.com/justinas/nosurf"
 )
 
 var app *config.AppConfig
@@ -19,11 +20,12 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func AddDefaultData(td *models.TemplateDate) *models.TemplateDate {
+func AddDefaultData(td *models.TemplateDate, r *http.Request) *models.TemplateDate {
+	td.CSRFToken = nosurf.Token(r)
 	return td
 }
 
-func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateDate) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateDate) {
 	var tc map[string]*template.Template
 	if app.UseCache {
 		tc = app.TemplateCache
@@ -38,11 +40,14 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateDate)
 
 	buf := new(bytes.Buffer)
 
-	td = AddDefaultData(td)
+	td = AddDefaultData(td, r)
 
-	_ = t.Execute(buf, td)
+	err := t.Execute(buf, td)
+	if err != nil {
+		fmt.Println("Template error:", err)
+	}
 
-	_, err := buf.WriteTo(w)
+	_, err = buf.WriteTo(w)
 	if err != nil {
 		fmt.Println("Error writing template to browser", err)
 	}
