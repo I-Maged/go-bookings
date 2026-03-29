@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
@@ -8,6 +9,7 @@ import (
 
 	"github.com/I-Maged/go-bookings/internal/config"
 	"github.com/I-Maged/go-bookings/internal/handlers"
+	"github.com/I-Maged/go-bookings/internal/models"
 	"github.com/I-Maged/go-bookings/internal/render"
 	"github.com/alexedwards/scs/v2"
 )
@@ -18,6 +20,7 @@ var app config.AppConfig
 var session *scs.SessionManager
 
 func main() {
+	gob.Register(models.Reservation{})
 	// should be true in production
 	app.InProduction = false
 
