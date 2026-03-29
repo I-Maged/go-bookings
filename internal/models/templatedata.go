@@ -1,5 +1,7 @@
 package models
 
+import "github.com/I-Maged/go-bookings/internal/forms"
+
 type TemplateDate struct {
 	StringMap map[string]string
 	IntMap    map[string]int
@@ -9,4 +11,5 @@ type TemplateDate struct {
 	Flash     string
 	Warning   string
 	Error     string
+	Form      *forms.Form
 }
